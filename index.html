@@ -38,8 +38,9 @@
     <span class="closeBtn" onclick="closeCard()">×</span>
     <h2>Student Report Card</h2>
 
-    <!-- 5 semester tables in HTML, JS will fill marks -->
+    <!-- 5 semester tables -->
     <div id="modalContent">
+      <!-- Semester tables -->
       <div class="semester" id="sem1">
         <h4>Semester 1</h4>
         <table>
@@ -50,8 +51,9 @@
           <tr><td>Subject 4</td><td class="s1sub4"></td></tr>
           <tr><td>Subject 5</td><td class="s1sub5"></td></tr>
         </table>
-        <p>Total: <span class="s1total"></span> Obtained: <span class="s1obt"></span> %: <span class="s1perc"></span></p>
+        <p>Total: <span class="s1total"></span> Obtained: <span class="s1obt"></span> %: <span class="s1perc"></span> GPA: <span class="s1gpa"></span></p>
       </div>
+
       <div class="semester" id="sem2">
         <h4>Semester 2</h4>
         <table>
@@ -62,8 +64,9 @@
           <tr><td>Subject 4</td><td class="s2sub4"></td></tr>
           <tr><td>Subject 5</td><td class="s2sub5"></td></tr>
         </table>
-        <p>Total: <span class="s2total"></span> Obtained: <span class="s2obt"></span> %: <span class="s2perc"></span></p>
+        <p>Total: <span class="s2total"></span> Obtained: <span class="s2obt"></span> %: <span class="s2perc"></span> GPA: <span class="s2gpa"></span></p>
       </div>
+
       <div class="semester" id="sem3">
         <h4>Semester 3</h4>
         <table>
@@ -74,8 +77,9 @@
           <tr><td>Subject 4</td><td class="s3sub4"></td></tr>
           <tr><td>Subject 5</td><td class="s3sub5"></td></tr>
         </table>
-        <p>Total: <span class="s3total"></span> Obtained: <span class="s3obt"></span> %: <span class="s3perc"></span></p>
+        <p>Total: <span class="s3total"></span> Obtained: <span class="s3obt"></span> %: <span class="s3perc"></span> GPA: <span class="s3gpa"></span></p>
       </div>
+
       <div class="semester" id="sem4">
         <h4>Semester 4</h4>
         <table>
@@ -86,8 +90,9 @@
           <tr><td>Subject 4</td><td class="s4sub4"></td></tr>
           <tr><td>Subject 5</td><td class="s4sub5"></td></tr>
         </table>
-        <p>Total: <span class="s4total"></span> Obtained: <span class="s4obt"></span> %: <span class="s4perc"></span></p>
+        <p>Total: <span class="s4total"></span> Obtained: <span class="s4obt"></span> %: <span class="s4perc"></span> GPA: <span class="s4gpa"></span></p>
       </div>
+
       <div class="semester" id="sem5">
         <h4>Semester 5</h4>
         <table>
@@ -98,14 +103,15 @@
           <tr><td>Subject 4</td><td class="s5sub4"></td></tr>
           <tr><td>Subject 5</td><td class="s5sub5"></td></tr>
         </table>
-        <p>Total: <span class="s5total"></span> Obtained: <span class="s5obt"></span> %: <span class="s5perc"></span></p>
+        <p>Total: <span class="s5total"></span> Obtained: <span class="s5obt"></span> %: <span class="s5perc"></span> GPA: <span class="s5gpa"></span></p>
       </div>
+
+      <!-- FINAL SUMMARY -->
       <div class="final-summary" id="finalSummary"></div>
     </div>
   </div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>

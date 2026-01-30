@@ -36,6 +36,7 @@ function showCard(r) {
   if(!s) return;
 
   let totalGrand=0, obtGrand=0, pass=true;
+  let semGPAs=[];
 
   s.m.map((sem,i)=>{
     let semTot=0;
@@ -45,9 +46,20 @@ function showCard(r) {
       if(mk<40) pass=false;
     });
     let semPerc = ((semTot/(sem.length*100))*100).toFixed(2);
+
+    // Semester GPA (4.0 scale)
+    let gpa = 0;
+    if(semPerc>=80) gpa=4.0;
+    else if(semPerc>=70) gpa=3.0;
+    else if(semPerc>=60) gpa=2.0;
+    else if(semPerc>=50) gpa=1.0;
+    else gpa=0.0;
+    semGPAs.push(gpa);
+
     document.querySelector(`.s${i+1}total`).textContent = sem.length*100;
     document.querySelector(`.s${i+1}obt`).textContent = semTot;
     document.querySelector(`.s${i+1}perc`).textContent = semPerc;
+    document.querySelector(`.s${i+1}gpa`).textContent = gpa.toFixed(1);
 
     totalGrand += sem.length*100;
     obtGrand += semTot;
@@ -60,7 +72,14 @@ function showCard(r) {
   else if(finalPerc>=60) grade="C";
   else if(finalPerc>=50) grade="D";
 
-  document.getElementById("finalSummary").innerHTML = `Final %: ${finalPerc}%<br>Grade: ${grade}<br>Status: ${pass?'PASS':'FAIL'}`;
+  let finalCGPA = (semGPAs.reduce((a,b)=>a+b,0)/semGPAs.length).toFixed(2);
+
+  document.getElementById("finalSummary").innerHTML = `
+    Final %: ${finalPerc}%<br>
+    Grade: ${grade}<br>
+    Status: ${pass?'PASS':'FAIL'}<br>
+    Final CGPA: ${finalCGPA}
+  `;
   document.getElementById("modalBox").style.display = "block";
 }
 
