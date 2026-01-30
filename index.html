@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SMIT Student Portal</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>SMIU Result Portal</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <div class="logo-box">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-cXFuavrc6SQ1s7DJvs55FQ-BF0bqYSM-iw&s" alt="Saylani Logo">
-    </div>
-    <h1>Saylani Mass IT Training (SMIT)</h1>
-    <p>Official Student Result Portal</p>
+<header class="header">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsxbIyrekUatLZpc_aBlrJYBqe8aHw2fCeA&s" class="logo">
+  <h1>Sindh Madressatul Islam University</h1>
+  <p>Student Result Portal</p>
 </header>
 
-<section class="portal">
-    <input type="text" id="rollInput" placeholder="Enter Roll Number (SMIT-101)">
-    <button onclick="searchResult()">View Result</button>
-</section>
+<!-- STUDENT CARDS -->
+<div class="cards-container" id="studentCards"></div>
 
-<section id="result" class="result hidden"></section>
+<!-- MODAL -->
+<div class="modal" id="reportSection">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <div id="reportBody"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
+<script>
+  function closeModal() {
+    document.getElementById("reportSection").style.display = "none";
+  }
+</script>
+
 </body>
 </html>

@@ -1,61 +1,132 @@
-const students = [
-    { roll:"SMIT-101", name:"Ali Khan", semesters:[[70,75,72,68,74],[65,67,70,66,69],[78,80,82,79,77],[70,72,74,71,73],[80,82,84,83,81]] },
-    { roll:"SMIT-102", name:"Ahmed Raza", semesters:[[45,50,48,52,49],[55,57,58,56,54],[60,62,61,63,64],[65,66,68,67,69],[70,72,71,73,74]] },
-    { roll:"SMIT-103", name:"Hassan Ali", semesters:[[80,82,84,83,81],[78,79,77,80,82],[85,86,88,87,84],[82,83,81,84,85],[88,90,89,87,86]] },
-    { roll:"SMIT-104", name:"Usman Tariq", semesters:[[60,62,61,63,64],[58,57,59,56,55],[65,66,68,67,69],[70,72,71,73,74],[68,67,69,66,65]] },
-    { roll:"SMIT-105", name:"Bilal Ahmed", semesters:[[35,40,45,42,38],[50,52,54,53,51],[55,57,56,58,59],[60,62,61,63,64],[65,66,68,67,69]] },
-    { roll:"SMIT-106", name:"Saad Khan", semesters:[[72,74,76,75,73],[70,71,69,68,72],[78,79,80,77,76],[75,74,73,72,71],[80,82,81,83,84]] },
-    { roll:"SMIT-107", name:"Zain Abbas", semesters:[[65,67,66,68,69],[60,62,61,63,64],[70,72,71,73,74],[68,69,67,66,65],[72,74,73,75,76]] },
-    { roll:"SMIT-108", name:"Ahsan Malik", semesters:[[55,57,56,58,59],[60,62,61,63,64],[65,66,68,67,69],[70,72,71,73,74],[75,77,76,78,79]] },
-    { roll:"SMIT-109", name:"Fahad Noor", semesters:[[48,50,49,51,52],[55,56,54,53,57],[60,62,61,63,64],[65,67,66,68,69],[70,72,71,73,74]] },
-    { roll:"SMIT-110", name:"Imran Sheikh", semesters:[[82,84,83,81,80],[78,79,77,80,82],[85,87,88,86,84],[82,83,81,84,85],[88,90,89,87,86]] }
+// ================= STUDENT DATA =================
+var students = [
+  {
+    id: "SMIU-001",
+    name: "Ali Khan",
+    semesters: [
+      [
+        { subject: "Math", marks: 80 },
+        { subject: "English", marks: 70 },
+        { subject: "Physics", marks: 75 },
+        { subject: "CS", marks: 85 },
+        { subject: "Pak Studies", marks: 78 }
+      ],
+      [
+        { subject: "Math", marks: 82 },
+        { subject: "English", marks: 72 },
+        { subject: "Physics", marks: 77 },
+        { subject: "CS", marks: 88 },
+        { subject: "Islamiat", marks: 80 }
+      ],
+      [
+        { subject: "OOP", marks: 84 },
+        { subject: "DBMS", marks: 76 },
+        { subject: "OS", marks: 79 },
+        { subject: "Stats", marks: 71 },
+        { subject: "AI", marks: 83 }
+      ],
+      [
+        { subject: "SE", marks: 81 },
+        { subject: "CN", marks: 74 },
+        { subject: "ML", marks: 78 },
+        { subject: "AI", marks: 86 },
+        { subject: "Ethics", marks: 80 }
+      ],
+      [
+        { subject: "Project", marks: 90 },
+        { subject: "Cyber", marks: 85 },
+        { subject: "Cloud", marks: 82 },
+        { subject: "Blockchain", marks: 79 },
+        { subject: "Research", marks: 88 }
+      ]
+    ]
+  }
 ];
 
-function searchResult(){
-    const roll = document.getElementById("rollInput").value.trim();
-    const result = document.getElementById("result");
-
-    const student = students.find(s => s.roll === roll);
-
-    if(!student){
-        result.classList.remove("hidden");
-        result.innerHTML = "<h3 style='color:red'>Record not found</h3>";
-        return;
-    }
-
-    let totalMarks = 0, totalSubjects = 0, pass = true;
-
-    const semesterHTML = student.semesters
-        .map((sem, index) => {
-            const semTotal = sem.reduce((a,b)=>a+b,0);
-            sem.map(m => { if(m<40) pass=false; });
-            totalMarks += semTotal;
-            totalSubjects += sem.length;
-            const percentage = (semTotal/(sem.length*100))*100;
-
-            return `
-                <div class="semester">
-                    <h4>Semester ${index+1}</h4>
-                    <p>Marks: ${sem.join(", ")}</p>
-                    <p>Percentage: ${percentage.toFixed(2)}%</p>
-                </div>
-            `;
-        })
-        .join("");
-
-    const finalPercentage = (totalMarks/(totalSubjects*100))*100;
-    const grade = finalPercentage>=80?"A":finalPercentage>=70?"B":finalPercentage>=60?"C":finalPercentage>=50?"D":"F";
-
-    result.classList.remove("hidden");
-    result.innerHTML = `
-        <h2>${student.name}</h2>
-        <p><strong>Roll:</strong> ${student.roll}</p>
-
-        ${semesterHTML}
-
-        <hr>
-        <h3>Total Percentage: ${finalPercentage.toFixed(2)}%</h3>
-        <h3>Grade: ${grade}</h3>
-        <h3 class="${pass?'pass':'fail'}">${pass?'PASS':'FAIL'}</h3>
-    `;
+// ===== COPY SAME STUDENT TO MAKE 10 STUDENTS (BASIC WAY)
+for (var i = 2; i <= 10; i++) {
+  var copyStudent = JSON.parse(JSON.stringify(students[0]));
+  copyStudent.id = "SMIU-00" + i;
+  copyStudent.name = "Student " + i;
+  students.push(copyStudent);
 }
+
+// ================= SHOW STUDENT CARDS =================
+var studentCards = document.getElementById("studentCards");
+
+students.map(function (student, index) {
+  studentCards.innerHTML +=
+    "<div class='student-card'>" +
+    "<h3>" + student.name + "</h3>" +
+    "<p>ID: " + student.id + "</p>" +
+    "<button onclick='showResult(" + index + ")'>View</button>" +
+    "</div>";
+});
+
+// ================= SHOW REPORT =================
+function showResult(index) {
+  var reportBody = document.getElementById("reportBody");
+  reportBody.innerHTML = "";
+
+  var student = students[index];
+
+  reportBody.innerHTML +=
+    "<h2>" + student.name + "</h2>" +
+    "<p>ID: " + student.id + "</p>";
+
+  var grandTotal = 0;
+  var grandObtained = 0;
+  var finalPercentageSum = 0;
+
+  student.semesters.map(function (semester, semIndex) {
+    var semTotal = semester.length * 100;
+    var semObtained = 0;
+
+    var tableHTML =
+      "<h3>Semester " + (semIndex + 1) + "</h3>" +
+      "<table>" +
+      "<tr><th>Subject</th><th>Marks</th></tr>";
+
+    semester.map(function (sub) {
+      semObtained = semObtained + sub.marks;
+
+      tableHTML +=
+        "<tr>" +
+        "<td>" + sub.subject + "</td>" +
+        "<td>" + sub.marks + "</td>" +
+        "</tr>";
+    });
+
+    var percentage = (semObtained / semTotal) * 100;
+    finalPercentageSum = finalPercentageSum + percentage;
+
+    tableHTML +=
+      "<tr><td>Total</td><td>" + semObtained + " / " + semTotal + "</td></tr>" +
+      "<tr><td>Percentage</td><td>" + percentage.toFixed(2) + "%</td></tr>" +
+      "</table>";
+
+    reportBody.innerHTML += tableHTML;
+
+    grandTotal = grandTotal + semTotal;
+    grandObtained = grandObtained + semObtained;
+  });
+
+  var finalPercentage = finalPercentageSum / 5;
+  var grade = "Fail";
+
+  if (finalPercentage >= 80) grade = "A";
+  else if (finalPercentage >= 70) grade = "B";
+  else if (finalPercentage >= 60) grade = "C";
+  else if (finalPercentage >= 50) grade = "D";
+
+  reportBody.innerHTML +=
+    "<div class='final-result'>" +
+    "<h3>Final Result</h3>" +
+    "<p>Grand Total: " + grandObtained + " / " + grandTotal + "</p>" +
+    "<p>Final Percentage: " + finalPercentage.toFixed(2) + "%</p>" +
+    "<p>Grade: " + grade + "</p>" +
+    "</div>";
+
+  document.getElementById("reportSection").style.display = "block";
+}
+document.getElementById("reportSection").style.display = "block";
