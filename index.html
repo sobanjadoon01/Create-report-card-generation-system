@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Result System</title>
+    <title>SMIT Student Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Student Result System</h1>
+<header>
+    <div class="logo-box">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-cXFuavrc6SQ1s7DJvs55FQ-BF0bqYSM-iw&s" alt="Saylani Logo">
+    </div>
+    <h1>Saylani Mass IT Training (SMIT)</h1>
+    <p>Official Student Result Portal</p>
+</header>
 
-<div id="cards"></div>
+<section class="portal">
+    <input type="text" id="rollInput" placeholder="Enter Roll Number (SMIT-101)">
+    <button onclick="searchResult()">View Result</button>
+</section>
 
-<!-- Detail Section -->
-<div id="details" class="hidden">
-    <h2 id="studentName"></h2>
-    <p id="studentId"></p>
-    <div id="semesters"></div>
-    <button onclick="closeDetails()">Close</button>
-</div>
+<section id="result" class="result hidden"></section>
 
 <script src="script.js"></script>
 </body>
